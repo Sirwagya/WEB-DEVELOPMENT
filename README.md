@@ -1,16 +1,73 @@
-# React + Vite
+# WEB-DEVELOPMENT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository is used for my college web development classes and daily assignments.
+It keeps each class exercise, question, and practice task organized by date so the
+work is easy to track, review, and submit.
 
-Currently, two official plugins are available:
+## What is in this repo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Daily class assignments and lab work
+- Question-wise React practice tasks
+- Small component experiments and exercises
+- Shared Vite + React setup for running the assignments locally
 
-## React Compiler
+## Project Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```text
+src/
+	App.jsx
+	main.jsx
+	index.css
+	Classes/
+		28 JUL /
+			Assignment/
+				Question-1/
+				Question-3/
+				Question-4 /
+		30 JUL /
+			react-router-dom/
+```
 
-## Expanding the ESLint configuration
+Each question folder usually contains:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `App.jsx` for the solution
+- `Q#.md` for the problem statement
+- `Components/` when the exercise is split into smaller parts
+
+## Getting Started
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+## Working Style
+
+- Keep each assignment inside its own dated folder.
+- Follow the question name or number when naming files.
+- Use `Q#.md` files to keep the prompt alongside the solution.
+- Prefer small, focused React components when an exercise grows larger.
+
+## Notes
+
+This repo is meant to reflect the day-by-day progress of the course, so structure and
+file naming are intentionally simple and easy to scan.
