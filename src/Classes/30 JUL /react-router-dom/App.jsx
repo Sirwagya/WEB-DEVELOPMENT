@@ -9,15 +9,17 @@ import Navbar from './components/Navbar.jsx'
 
 const App = () => {
   return (
-    <>
-    <Navbar />
-    <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </>
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex flex-1 items-center justify-center text-center font-bold bg-gray-700 text-zinc-300 text-5xl">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+    </div>
   )
 }
 
