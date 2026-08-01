@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+/* button{
+    cursor :pointer;
+    margin: 10px 10px 10px 10px;
+    border: 2px;
+    border-color: black;
+    background-color: grey;
+    padding: 7px;
+    border-radius: 10px
+}
+body{
+    user-select: none;
+} */ 
