@@ -1,6 +1,6 @@
 
 import { createRoot } from 'react-dom/client'
-import App from './Classes/29 JUL / Assignment/App'
+import App from './Classes/7 AUG / Class/App'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 
