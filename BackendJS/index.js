@@ -33,6 +33,34 @@ app.post('/signUp', async (req, res)=>{
 
     
 })
+app.post('/signin', async (req, res)=>{
+    let {email, password} = req.body;
+    let mail = await userModel.findOne({email})
+    console.log(mail);
+    //password = await bcrypt.hash(password, 10);
+
+    if (mail){
+        await bcrypt.compare(password, mail.password).then((match)=>{
+            if(match){
+                res.send({
+                    msg : "login successful",
+                    user : mail
+                });
+            }
+            else{
+                res.send({
+                    msg : "password incorrect"
+                });
+            }
+    })}
+    else {
+        res.send({
+            msg : "user not found"
+        });
+    }
+
+    
+})
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
