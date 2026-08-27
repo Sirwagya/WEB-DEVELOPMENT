@@ -17,7 +17,7 @@ app.post('/signUp', async (req, res)=>{
     password = await bcrypt.hash(password, 10);
 
     if (mail){
-        res.send({message: "Email already exists"});
+        res.send({msg: "Email already exists"});
     }
     else {
 
@@ -28,7 +28,10 @@ app.post('/signUp', async (req, res)=>{
             mobile
         });
     
-        res.send(user);
+        res.send({
+                    msg : "sign up successful",
+                    user : mail
+                });
     }
 
     
