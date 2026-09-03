@@ -49,6 +49,22 @@ let auth = (req, res, next) => {
   next();
 };
 
+let isAdmin = (req, res, next) => {
+  let token = req.headers.authorization;
+
+  if (!token) return res.send("Invalid/Null Token");
+
+  let decode = jwt.verify(token, "hehehehehe");
+
+  if (decode.role !== "admin") {
+    return res.status(403).send({
+      msg: "Access Denied",
+    });
+  }
+
+  next();
+};
+
 app.post("/signin", async (req, res) => {
   let { email, password } = req.body;
   let mail = await userModel.findOne({ email });
@@ -83,6 +99,13 @@ app.get("/getData", auth,(req, res) => {
     msg : "Authorized",
   });
 });
+
+app.get("/admin", auth, isAdmin, (req, res) => {
+  res.send({
+    msg: "Welcome Admin",
+  });
+});
+
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");

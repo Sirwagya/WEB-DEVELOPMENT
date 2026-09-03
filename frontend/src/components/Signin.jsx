@@ -21,6 +21,7 @@ const Signin = () => {
 
     const response = await axios.post("http://localhost:3000/signin", formData);
     setMsg(response.data.msg);
+    localStorage.setItem("token", response.data.token);
   };
   return (
     <form onSubmit={signin}>
