@@ -7,7 +7,8 @@ const Signup = () => {
     name: "",
     email: "",
     password: "",
-    mobile: ""
+    mobile: "",
+    role: "user"
   });
 
   const handleChange = (event) => {
@@ -54,6 +55,13 @@ const Signup = () => {
         onChange={handleChange}
         placeholder="mobile number"
         value={formData.mobile}
+      />
+      <input
+        type="text"
+        name="role"
+        onChange={handleChange}
+        placeholder="role , default: user"
+        value={formData.role}
       />
 
       <button type="submit">Sign Up</button>
