@@ -57,8 +57,8 @@ let isAdmin = (req, res, next) => {
   let decode = jwt.verify(token, "hehehehehe");
 
   if (decode.role !== "admin") {
-    return res.status(403).send({
-      msg: "Access Denied",
+    return res.send({
+      msg: "VIP Only",
     });
   }
 
