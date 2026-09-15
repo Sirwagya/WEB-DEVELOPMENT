@@ -10,6 +10,8 @@ let user = new mongoose.Schema({
     enum: ["admin", "user"],
     default: "user",
   },
+  resetToken: String,
+  resetTokenExpiry: Date
 });
 
 let userModel = mongoose.model("user", user);

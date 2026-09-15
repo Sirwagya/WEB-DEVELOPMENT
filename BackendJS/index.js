@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import userModel from "./db/db.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import forgotRouter from "./routes/forgot.js";
+import resetPassRouter from "./routes/resetPass.js";
 
 mongoose.connect("mongodb://127.0.0.1:27017/DB").then(() => {
   console.log("Connected to MongoDB");
@@ -11,7 +13,11 @@ mongoose.connect("mongodb://127.0.0.1:27017/DB").then(() => {
 
 let app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(forgotRouter);
+app.use(resetPassRouter);
+
 
 app.post("/signUp", async (req, res) => {
   let { name, email, password, mobile, role } = req.body;
