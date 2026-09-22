@@ -1,9 +1,11 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import userModel from "./db/db.js";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+
+import signUpRouter from "./routes/signUp.js";
+import signInRouter from "./routes/signIn.js";
+import getDataRouter from "./routes/getData.js";
+import adminRouter from "./routes/admin.js";
 import forgotRouter from "./routes/forgot.js";
 import resetPassRouter from "./routes/resetPass.js";
 
@@ -15,103 +17,14 @@ let app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+// Routes
+app.use(signUpRouter);
+app.use(signInRouter);
+app.use(getDataRouter);
+app.use(adminRouter);
 app.use(forgotRouter);
 app.use(resetPassRouter);
-
-
-app.post("/signUp", async (req, res) => {
-  let { name, email, password, mobile, role } = req.body;
-  let mail = await userModel.findOne({ email });
-  password = await bcrypt.hash(password, 10);
-
-  if (mail) {
-    res.send({ msg: "Email already exists" });
-  } else {
-    const user = await userModel.create({
-      name,
-      email,
-      password,
-      mobile,
-      role: role || "user",
-    });
-
-    res.send({
-      msg: "sign up successful",
-      user: user,
-    });
-  }
-});
-
-let auth = (req, res, next) => {
-  let token = req.headers.authorization;
-  console.log(token, "toeknn");
-
-  if (!token) {
-    return res.send("kaun hai app...");
-  }
-
-  let decode = jwt.verify(token, "hehehehehe");
-  console.log(decode, "isse");
-  next();
-};
-
-let isAdmin = (req, res, next) => {
-  let token = req.headers.authorization;
-
-  if (!token) return res.send("Invalid/Null Token");
-
-  let decode = jwt.verify(token, "hehehehehe");
-
-  if (decode.role !== "admin") {
-    return res.send({
-      msg: "VIP Only",
-    });
-  }
-
-  next();
-};
-
-app.post("/signin", async (req, res) => {
-  let { email, password } = req.body;
-  let mail = await userModel.findOne({ email });
-
-  if (mail) {
-    await bcrypt.compare(password, mail.password).then((match) => {
-      if (match) {
-        let token = jwt.sign(
-          { email: mail.email, role: mail.role },
-          "hehehehehe",
-        );
-
-        console.log(token, "hehe");
-
-        res.json({ msg: "done", token: token });
-      } else {
-        res.send({
-          msg: "password incorrect",
-        });
-      }
-    });
-  } else {
-    res.send({
-      msg: "user not found",
-    });
-  }
-});
-
-app.get("/getData", auth,(req, res) => {
-
-  res.send({
-    msg : "Authorized",
-  });
-});
-
-app.get("/admin", auth, isAdmin, (req, res) => {
-  res.send({
-    msg: "Welcome Admin",
-  });
-});
-
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");

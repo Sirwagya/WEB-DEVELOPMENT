@@ -1,6 +1,6 @@
 import express from "express";
 import crypto from "crypto";
-import User from "../db/db.js";
+import User from "../models/userModel.js";
 import { sendEmail } from "./sendEmail.js";
 
 const router = express.Router();
@@ -26,12 +26,14 @@ router.post(["/forgot", "/api/forgot"], async (req, res) => {
     await sendEmail(
       user.email,
       "Password Reset Request",
-      `Click the link below to reset your password:\n\n${resetUrl}`
+      `Click the link below to reset your password:\n\n${resetUrl}`,
     );
 
     res.status(200).send({ msg: "Password reset email sent" });
   } catch (error) {
-    res.status(500).send({ msg: "Error sending password reset email: " + error.message });
+    res
+      .status(500)
+      .send({ msg: "Error sending password reset email: " + error.message });
   }
 });
 
